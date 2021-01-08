@@ -11,7 +11,7 @@ import SelectedProduct from './pages/selected-product';
 import Orders from './pages/cart';
 import Lemon from './lemon.jpg';
 import Cart from './cartIcon.png'
-import {Logo, CartIcon, Header, Subtotal, StyledLink} from './styled-components'
+import {Logo, CartIcon, Header, HeadSubTotal, StyledLink, CartContainer} from './styled-components'
 import ProductContext from "./context";
 import {subTotal} from "./utils";
 
@@ -19,15 +19,17 @@ function App() {
   const {selectedProducts} = useContext(ProductContext)
 
   return (
-    <div className='App'>
+    <div>
       <Router>
         <Header>
         <Link to='/'>
           <Logo src={Lemon} alt='lemon'/>
         </Link>
         <StyledLink to='/orders'>
+          <CartContainer >
+            <h4> <HeadSubTotal>Subtotal:</HeadSubTotal> {subTotal(selectedProducts)} ₴</h4>
           <CartIcon src={Cart} alt='cart'/>
-          <h3> <Subtotal>Subtotal:</Subtotal> {subTotal(selectedProducts)} ₴</h3>
+          </CartContainer>
         </StyledLink>
         </Header>
 
@@ -43,7 +45,6 @@ function App() {
           </Route>
         </Switch>
       </Router>
-
     </div>
   );
 }
