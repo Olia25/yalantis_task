@@ -1,13 +1,23 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import ProductsContext from "./context";
+
+function Main () {
+    const [selectedProducts, setSelectedProducts] = useState([])
+    return(
+        <React.StrictMode>
+            <ProductsContext.Provider value = {{selectedProducts, setSelectedProducts}}>
+                <App />
+            </ProductsContext.Provider>
+        </React.StrictMode>
+    )
+}
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+    <Main />,
   document.getElementById('root')
 );
 
