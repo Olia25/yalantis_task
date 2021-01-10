@@ -16,7 +16,6 @@ const Home = () => {
     const [data, setData] = useState([]);
     const [text, setText] = useState("");
     const {selectedProducts, setSelectedProducts} = useContext(ProductContext);
-    console.log("selectedProduct", selectedProducts);
 
     const fetchData = async () => {
         try {

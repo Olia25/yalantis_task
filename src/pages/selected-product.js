@@ -14,10 +14,7 @@ const SelectedProduct = () => {
     const {productId} = useParams();
 
     const [product, setProduct] = useState(null);
-    console.log("product", product);
-
     const {selectedProducts, setSelectedProducts} = useContext(ProductContext);
-    console.log("selectProduct", selectedProducts);
 
     const fetchProduct = async (id) => {
         try {

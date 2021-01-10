@@ -11,7 +11,6 @@ import Delete from "../deleteIcon.png";
 
 const Orders = () => {
   const {selectedProducts, setSelectedProducts} = useContext(ProductContext);
-  console.log("selectedProduct", selectedProducts);
 
   const subTotal = selectedProducts.reduce(
       (sum, elem) => sum + elem.price * elem.quantity,
