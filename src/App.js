@@ -1,11 +1,11 @@
 import "./App.css";
-import React, { useContext } from "react";
+import React from "react";
 import { Switch, Route, Link, useRouteMatch } from "react-router-dom";
-import Home from "Components/products";
-import SelectedProduct from "./Components/selected-product";
-import Orders from "Components/cart";
-import Lemon from "./assets/lemon.jpg";
-import Cart from "./assets/cartIcon.png";
+import Home from "pages/products";
+import SelectedProduct from "pages/selectedProduct";
+import Orders from "pages/cart";
+import Lemon from "assets/icons/lemon.jpg";
+import Cart from "assets/icons/cartIcon.png";
 import {
   Logo,
   CartIcon,
@@ -13,13 +13,16 @@ import {
   HeadSubTotal,
   StyledLink,
   CartContainer,
+  Button,
 } from "./styledComponents";
-import ProductContext from "./context";
-import { subTotal } from "utils";
+import { useSubTotal } from "helper/useSubTotal";
+import { useDispatch } from "react-redux";
+import { cartActions } from "redux/cart/actions";
 
 function App() {
-  const { selectedProducts } = useContext(ProductContext);
   const match = useRouteMatch("/orders");
+  const subTotal = useSubTotal();
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -32,12 +35,17 @@ function App() {
             <CartContainer>
               <h4>
                 {" "}
-                <HeadSubTotal>Subtotal:</HeadSubTotal>{" "}
-                {subTotal(selectedProducts)} ₴
+                <HeadSubTotal>{subTotal} ₴</HeadSubTotal>
               </h4>
               <CartIcon src={Cart} alt="cart" />
             </CartContainer>
           </StyledLink>
+        )}
+        {match && (
+          <Button onClick={() => dispatch(cartActions.clearCart())}>
+            {" "}
+            Clear Cart{" "}
+          </Button>
         )}
       </Header>
       <Switch>

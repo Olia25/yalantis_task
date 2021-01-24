@@ -9,9 +9,9 @@ export const CartIcon = styled.img`
   align-self: center;
 `;
 export const HeadSubTotal = styled.span`
-  text-shadow: 1px 1px 1px black;
-  color: #ffd633;
-  font-size: 12px;
+  text-shadow: 1px 1px 1px #ffd633;
+  color: #595959;
+  font-size: 15px;
 `;
 export const DeleteIcon = styled.img`
   height: 25px;
@@ -47,7 +47,7 @@ export const Container = styled.div`
 export const CoverOfProducts = styled.div`
   border: 1px solid #a6a6a6;
   padding-left: 10px;
-  width: 200px;
+  width: 210px;
   margin: 30px 20px;
   background-color: rgba(255, 255, 255, 0.8);
   &:hover {
@@ -93,17 +93,85 @@ export const WidthCardTable = styled.div`
 export const TopTable = styled.div`
   display: flex;
   justify-content: space-around;
-  width: 100%;
-  /*width: 700px;*/
   background-color: #bfbfbf;
+  & p {
+    width: 200px;
+    text-align: center;
+  }
 `;
 export const DataOfProducts = styled.div`
   display: flex;
   justify-content: space-around;
   border-bottom: 1px solid grey;
-  /*width: 700px;*/
   & p {
     width: 200px;
     text-align: center;
+  }
+`;
+export const ButtonOFQuantity = styled.button`
+  border: 0;
+  background: white;
+  font-size: 20px;
+`;
+export const PriceInput = styled.input`
+  width: 70px;
+`;
+export const LayoutWithSidebar = styled.div`
+  display: flex;
+`;
+export const BlockFilters = styled.div`
+  width: 280px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  box-shadow: 0 0 5px 0 #ccc;
+  margin-top: 33px;
+  margin-left: 20px;
+  border-radius: 10px;
+`;
+export const FilterByCountry = styled.div`
+  border: 1px dotted #bfbfbf;
+  margin: 20px;
+  padding-bottom: 40px;
+  & h3 {
+    text-align: center;
+    color: #595959;
+  }
+`;
+export const FilterOrigin = styled.div`
+  display: flex;
+  & input {
+    margin-left: 15px;
+  }
+  & span {
+    margin-left: 5px;
+  }
+`;
+export const FilterByPrice = styled.div`
+  border: 1px dotted #bfbfbf;
+  margin: 20px;
+  padding-bottom: 40px;
+  text-align: center;
+  & h3 {
+    color: #595959;
+  }
+`;
+export const SearchSorting = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-item: end;
+`;
+export const SelectStyle = styled.select`
+  align-self: flex-end;
+  margin-top: 15px;
+  margin-right: 10px;
+  padding: 1px;
+`;
+export const PriceButton = styled.button`
+  margin-left: 5px;
+  border-radius: 5px;
+  background-color: #ffffff;
+  border-color: #a6a6a6;
+  & span {
+    color: #595959;
   }
 `;
