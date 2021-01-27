@@ -5,36 +5,29 @@ import {
   FilterByPrice,
   FilterOrigin,
   PriceButton,
-  PriceInput,
 } from "styledComponents";
 import { ORIGINS } from "constants/constants";
+import { useDispatch } from "react-redux";
+import { priceActions } from "redux/priceFilter/actions";
+import { originsActions } from "redux/origins/actions";
+import InputsPrice from "components/InputsPrice";
 
 const Filter = (props) => {
-  const [minPrice, setMinPrice] = useState(1);
-  const [maxPrice, setMaxPrice] = useState(10000);
-
-  const getCheckOrigins = (checked, elem) => {
-    props.setOrigins(
-      checked
-        ? [...props.origins, elem]
-        : props.origins.filter((country) => country !== elem)
-    );
-  };
-
-  const onClick = () => {
-    props.setPriceFiltering({ minPrice: minPrice, maxPrice: maxPrice });
-  };
+  const [minPrice, setMinPrice] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
+  const dispatch = useDispatch();
 
   return (
     <BlockFilters>
       <FilterByCountry>
         <h3>ORIGINS</h3>
-        {ORIGINS.map((elem, index) => (
-          <FilterOrigin key={index}>
-            {" "}
+        {ORIGINS.map((elem) => (
+          <FilterOrigin key={elem}>
             <input
               type="checkbox"
-              onChange={(value) => getCheckOrigins(value.target.checked, elem)}
+              onChange={(value) =>
+                dispatch(originsActions.getOrigins({ value, elem }))
+              }
             />
             <span> {elem} </span>
           </FilterOrigin>
@@ -43,16 +36,14 @@ const Filter = (props) => {
 
       <FilterByPrice>
         <h3>PRICE RANGE</h3>
-        <PriceInput
-          value={minPrice}
-          onChange={({ target: { value } }) => setMinPrice(value)}
-        />
+        <InputsPrice price={minPrice} setPrice={setMinPrice} />
         -
-        <PriceInput
-          value={maxPrice}
-          onChange={({ target: { value } }) => setMaxPrice(value)}
-        />
-        <PriceButton onClick={onClick}>
+        <InputsPrice price={maxPrice} setPrice={setMaxPrice} />
+        <PriceButton
+          onClick={() =>
+            dispatch(priceActions.changeMinMaxPrice({ minPrice, maxPrice }))
+          }
+        >
           {" "}
           <span>Ok</span>{" "}
         </PriceButton>

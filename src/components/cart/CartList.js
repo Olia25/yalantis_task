@@ -1,8 +1,13 @@
 import React from "react";
-import { ButtonOFQuantity, DataOfProducts, DeleteIcon } from "styledComponents";
+import {
+  DataOfProducts,
+  DeleteIcon,
+  InputQuantityStyle,
+} from "styledComponents";
 import { cartActions } from "redux/cart/actions";
 import Delete from "assets/icons/deleteIcon.png";
 import { useDispatch } from "react-redux";
+import ButtonQuantity from "components/ButtonQuantity";
 
 const CartList = ({ elem: { name, price, quantity, id } }) => {
   const dispatch = useDispatch();
@@ -11,26 +16,25 @@ const CartList = ({ elem: { name, price, quantity, id } }) => {
       <p>{name}</p>
       <p>{price} ₴</p>
       <p>
-        <ButtonOFQuantity
-          disabled={quantity === 1 && "disabled"}
-          onClick={() => dispatch(cartActions.subtractQuantity(id))}
-        >
-          {" "}
-          -{" "}
-        </ButtonOFQuantity>
-        <input
-          className="inputt"
+        <ButtonQuantity
+          quantity={quantity}
+          id={id}
+          action={cartActions.subtractQuantity}
+          operator={"-"}
+          disabled={"disabled"}
+        />
+        <InputQuantityStyle
           value={quantity}
           onChange={({ target: { value } }) => {
             dispatch(cartActions.changeQuantity({ value, id }));
           }}
         />
-        <ButtonOFQuantity
-          onClick={() => dispatch(cartActions.increaseQuantity(id))}
-        >
-          {" "}
-          +{" "}
-        </ButtonOFQuantity>
+        <ButtonQuantity
+          quantity={quantity}
+          id={id}
+          action={cartActions.increaseQuantity}
+          operator={"+"}
+        />
       </p>
       <p>{price * quantity} ₴</p>
       <p>

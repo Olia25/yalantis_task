@@ -34,7 +34,6 @@ function App() {
           <StyledLink to="/orders">
             <CartContainer>
               <h4>
-                {" "}
                 <HeadSubTotal>{subTotal} ₴</HeadSubTotal>
               </h4>
               <CartIcon src={Cart} alt="cart" />

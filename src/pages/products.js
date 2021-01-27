@@ -15,15 +15,25 @@ import Filter from "components/productList/Filter";
 
 const Home = () => {
   const [text, setText] = useState("");
-  const [origins, setOrigins] = useState([]);
-  const [priceFiltering, setPriceFiltering] = useState({});
   const [selectedValue, setSelectedValue] = useState(null);
+  const prices = useSelector((state) => state.priceFilter);
+  const origins = useSelector((state) => state.origins);
 
-  useProducts(
-    `${API_URL}/products?origins=${origins.map((e) => e)}&minPrice=${
-      priceFiltering.minPrice
-    }&maxPrice=${priceFiltering.maxPrice}`
-  );
+  const urlParams = useMemo(() => {
+    const params = new URLSearchParams();
+    if (origins.length > 0) {
+      params.set("origins", origins);
+    }
+    if (prices.min) {
+      params.set("minPrice", prices.min);
+    }
+    if (prices.max) {
+      params.set("maxPrice", prices.max);
+    }
+    return params.toString();
+  }, [origins, prices]);
+
+  useProducts(`${API_URL}/products?${urlParams}`);
 
   const value = useSelector((state) => state.productList);
 
@@ -61,11 +71,7 @@ const Home = () => {
       </SearchSorting>
       <LayoutWithSidebar>
         <div>
-          <Filter
-            origins={origins}
-            setOrigins={setOrigins}
-            setPriceFiltering={setPriceFiltering}
-          />
+          <Filter origins={origins} />
         </div>
         <div>
           <Container>

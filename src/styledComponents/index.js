@@ -114,7 +114,7 @@ export const ButtonOFQuantity = styled.button`
   font-size: 20px;
 `;
 export const PriceInput = styled.input`
-  width: 70px;
+  width: 65px;
 `;
 export const LayoutWithSidebar = styled.div`
   display: flex;
@@ -174,4 +174,11 @@ export const PriceButton = styled.button`
   & span {
     color: #595959;
   }
+`;
+export const InputQuantityStyle = styled.input`
+  width: 25px;
+  height: 25px;
+  margin-left: 10px;
+  margin-right: 10px;
+  text-align: center;
 `;

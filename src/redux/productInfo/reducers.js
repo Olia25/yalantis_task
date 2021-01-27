@@ -1,10 +1,6 @@
 import { createReducer } from "@reduxjs/toolkit";
 import { productActions } from "redux/productInfo/actions";
 
-// export const start = createAction("FETCH_START_PRODUCT");
-// export const success = createAction("FETCH_SUCCESS_PRODUCT");
-// export const error = createAction("FETCH_ERROR_PRODUCT");
-
 const initialState = {
   data: {},
   error: null,
