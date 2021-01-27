@@ -12,12 +12,14 @@ import { API_URL } from "constants/constants";
 import { useSelector } from "react-redux";
 import ProductList from "components/productList/ProductList";
 import Filter from "components/productList/Filter";
+import { setPriceFilter } from "redux/priceFilter/selectors";
+import { setOrigins } from "redux/origins/selectors";
 
 const Home = () => {
   const [text, setText] = useState("");
   const [selectedValue, setSelectedValue] = useState(null);
-  const prices = useSelector((state) => state.priceFilter);
-  const origins = useSelector((state) => state.origins);
+  const prices = useSelector(setPriceFilter);
+  const origins = useSelector(setOrigins);
 
   const urlParams = useMemo(() => {
     const params = new URLSearchParams();

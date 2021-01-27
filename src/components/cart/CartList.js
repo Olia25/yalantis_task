@@ -20,20 +20,20 @@ const CartList = ({ elem: { name, price, quantity, id } }) => {
           quantity={quantity}
           id={id}
           action={cartActions.subtractQuantity}
-          operator={"-"}
+          operator="-"
           disabled={"disabled"}
         />
         <InputQuantityStyle
           value={quantity}
-          onChange={({ target: { value } }) => {
-            dispatch(cartActions.changeQuantity({ value, id }));
-          }}
+          onChange={({ target: { value } }) =>
+            dispatch(cartActions.changeQuantity({ value, id }))
+          }
         />
         <ButtonQuantity
           quantity={quantity}
           id={id}
           action={cartActions.increaseQuantity}
-          operator={"+"}
+          operator="+"
         />
       </p>
       <p>{price * quantity} ₴</p>

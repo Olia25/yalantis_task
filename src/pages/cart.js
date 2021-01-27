@@ -8,9 +8,10 @@ import {
 import { useSelector } from "react-redux";
 import { useSubTotal } from "helper/useSubTotal";
 import CartList from "components/cart/CartList";
+import { setCart } from "redux/cart/selectors";
 
 const Orders = () => {
-  const selectProducts = useSelector((state) => state.cart);
+  const selectProducts = useSelector(setCart);
   const subTotal = useSubTotal();
 
   return (
