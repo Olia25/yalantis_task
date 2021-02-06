@@ -7,7 +7,7 @@ import {
 import { cartActions } from "redux/cart/actions";
 import Delete from "assets/icons/deleteIcon.png";
 import { useDispatch } from "react-redux";
-import ButtonQuantity from "components/ButtonQuantity";
+import ButtonQuantity from "components/cart/ButtonQuantity";
 
 const CartList = ({ elem: { name, price, quantity, id } }) => {
   const dispatch = useDispatch();

@@ -1,10 +1,12 @@
 import React from "react";
 import { Button, CoverOfProducts, StyledLink } from "styledComponents";
-import { cartActions } from "redux/cart/actions";
 import { useDispatch } from "react-redux";
 
-const ProductList = ({ product }) => {
-  const dispatch = useDispatch();
+const ProductList = ({ product, title, action }) => {
+  // const OpenModal = useSelector(selectUpdateOpenModal);
+  //
+  // console.log(OpenModal);
+
   return (
     <CoverOfProducts>
       <StyledLink to={`/products/${product.id}`}>
@@ -14,9 +16,7 @@ const ProductList = ({ product }) => {
           <h2>{product.price} ₴</h2>
         </div>
       </StyledLink>
-      <Button onClick={() => dispatch(cartActions.addProducts(product))}>
-        Add to cart
-      </Button>
+      <Button onClick={action}>{title}</Button>
     </CoverOfProducts>
   );
 };

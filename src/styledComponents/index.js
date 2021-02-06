@@ -4,14 +4,20 @@ import { Link } from "react-router-dom";
 export const Logo = styled.img`
   width: 80px;
 `;
+export const OwnProducts = styled.img`
+  width: 40px;
+  margin-left: 30px;
+`;
 export const CartIcon = styled.img`
   width: 40px;
   align-self: center;
 `;
-export const HeadSubTotal = styled.span`
+export const LogoTitle = styled.span`
   text-shadow: 1px 1px 1px #ffd633;
   color: #595959;
   font-size: 15px;
+  font-weight: bold;
+  text-align: center;
 `;
 export const DeleteIcon = styled.img`
   height: 25px;
@@ -22,9 +28,20 @@ export const Header = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
-export const CartContainer = styled.div`
+export const NavbarBrand = styled.div`
+  margin-left: 10px;
+`;
+export const Navbar = styled.div`
   display: flex;
+  justify-content: space-around;
+`;
+export const LogoContainer = styled.div`
+  width: 100px;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
+  aline-item: center;
+  position: relative;
 `;
 export const SearchLine = styled.div`
   background-color: #ffd633;
@@ -64,6 +81,7 @@ export const Button = styled.button`
   font-size: 15px;
   text-shadow: 1px 1px 5px black;
   margin-bottom: 10px;
+  border: none;
 `;
 export const StyledLink = styled(Link)`
   color: #595959;
@@ -112,6 +130,7 @@ export const ButtonOFQuantity = styled.button`
   border: 0;
   background: white;
   font-size: 20px;
+  border: none;
 `;
 export const PriceInput = styled.input`
   width: 65px;
@@ -166,7 +185,7 @@ export const SelectStyle = styled.select`
   margin-right: 10px;
   padding: 1px;
 `;
-export const PriceButton = styled.button`
+export const PriceButtonOk = styled.button`
   margin-left: 5px;
   border-radius: 5px;
   background-color: #ffffff;

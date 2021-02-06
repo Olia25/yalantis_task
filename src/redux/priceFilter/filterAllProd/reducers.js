@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { priceActions } from "redux/priceFilter/actions";
+import { priceActions } from "redux/priceFilter/filterAllProd/actions";
 
 const initialState = {
   min: null,
