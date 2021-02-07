@@ -10,7 +10,7 @@ const SelectedProduct = () => {
   const dispatch = useDispatch();
   const { productId } = useParams();
 
-  useProduct(`${API_URL}/products/${productId}`);
+  useProduct(productId);
   const value = useSelector((state) => state.productInfo);
   const product = value.data;
 

@@ -12,7 +12,7 @@ const FilterProducts = ({ filteredOrigins, actionOrig, actionPrice }) => {
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
 
-  useOrigin(`${API_URL}/products-origins`);
+  useOrigin();
   const origins = useSelector(setOrigins);
 
   return (

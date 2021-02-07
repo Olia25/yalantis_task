@@ -33,7 +33,7 @@ const Home = () => {
     () => setUrlParams(getOrigins, prices.min, prices.max),
     [getOrigins, prices]
   );
-  useProducts(`${API_URL}/products?${urlParams}`);
+  useProducts(urlParams);
   const value = useSelector(getProducts);
 
   const products = useMemo(() => sortProducts(value, selectedValue), [

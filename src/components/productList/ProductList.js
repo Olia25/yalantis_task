@@ -1,12 +1,7 @@
 import React from "react";
 import { Button, CoverOfProducts, StyledLink } from "styledComponents";
-import { useDispatch } from "react-redux";
 
 const ProductList = ({ product, title, action }) => {
-  // const OpenModal = useSelector(selectUpdateOpenModal);
-  //
-  // console.log(OpenModal);
-
   return (
     <CoverOfProducts>
       <StyledLink to={`/products/${product.id}`}>

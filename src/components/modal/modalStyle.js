@@ -11,15 +11,12 @@ export const ModalBackground = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  // transition: transform 0.3s;
-  // ${({ open }) => `transform: translateX(${open ? "0" : "-100"}%);`}
 `;
 
 export const ModalWrapper = styled.div`
   width: 300px;
   background: #fff;
   padding: 20px;
-  // z-index: 777;
 `;
 
 export const ModalHeader = styled.div`

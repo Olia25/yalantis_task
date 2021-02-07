@@ -2,15 +2,15 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import axios from "axios";
 import { myProductsActions } from "redux/myProductList/actions";
-import {TOKEN} from "constants/constants";
+import {TOKEN, API_URL} from "constants/constants";
 
 
-const useProducts = (url) => {
+const useProducts = (urlParams) => {
   const dispatch = useDispatch();
-  const getProducts = async (url) => {
+  const getProducts = async (urlParam) => {
     dispatch(myProductsActions.start());
     try {
-      const response = await axios(`${url}`, {
+      const response = await axios(`${API_URL}/products?${urlParam}&editable=true`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -24,8 +24,8 @@ const useProducts = (url) => {
     }
   };
   useEffect(() => {
-    getProducts(url);
-  }, [url]);
+    getProducts(urlParams);
+  }, [urlParams]);
 };
 
 export default useProducts;

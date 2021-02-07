@@ -40,7 +40,7 @@ const MyProducts = () => {
     [getOrigins, prices]
   );
 
-  useMyProducts(`${API_URL}/products?${urlParams}&editable=true`);
+  useMyProducts(urlParams);
   const value = useSelector(getMyProducts);
 
   const products = useMemo(() => sortProducts(value, selectedValue), [
