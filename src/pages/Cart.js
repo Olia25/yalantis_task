@@ -10,7 +10,7 @@ import { useSubTotal } from "helper/useSubTotal";
 import CartList from "components/cart/CartList";
 import { setCart } from "redux/cart/selectors";
 
-const Orders = () => {
+const Cart = () => {
   const selectProducts = useSelector(setCart);
   const subTotal = useSubTotal();
 
@@ -41,4 +41,4 @@ const Orders = () => {
   );
 };
 
-export default Orders;
+export default Cart;

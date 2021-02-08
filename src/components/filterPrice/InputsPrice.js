@@ -1,11 +1,11 @@
 import { PriceInput } from "styledComponents";
 import React from "react";
 
-const InputsPrice = (props) => {
+const InputsPrice = ({ price, setPrice }) => {
   return (
     <PriceInput
-      value={props.price}
-      onChange={({ target: { value } }) => props.setPrice(value)}
+      value={price}
+      onChange={({ target: { value } }) => setPrice(value)}
     />
   );
 };
