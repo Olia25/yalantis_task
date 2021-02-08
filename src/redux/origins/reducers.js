@@ -1,15 +1,31 @@
 import { createReducer } from "@reduxjs/toolkit";
 import { originsActions } from "redux/origins/actions";
 
-const reducer = createReducer([], {
-  [originsActions.getOrigins]: (state, action) => {
-    const { value, elem } = action.payload;
-    if (value.target.checked) {
-      return [...state, elem];
-    } else {
-      return state.filter((country) => country !== elem);
-    }
-  },
+const initialState = {
+  data: [],
+  error: null,
+  loading: false,
+  success: false,
+};
+
+const reducers = createReducer(initialState, {
+  [originsActions.start]: (state) => ({
+    ...state,
+    error: null,
+    loading: true,
+  }),
+  [originsActions.success]: (state, action) => ({
+    ...state,
+    loading: false,
+    succeed: true,
+    data: action.payload,
+  }),
+  [originsActions.error]: (state, action) => ({
+    ...state,
+    loading: false,
+    success: false,
+    error: action.payload,
+  }),
 });
 
-export default reducer;
+export default reducers;

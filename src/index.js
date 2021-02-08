@@ -5,21 +5,7 @@ import App from "App";
 import reportWebVitals from "reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import { createStore, combineReducers } from "redux";
-import products from "redux/productList/reducers";
-import cart from "redux/cart/reducers";
-import product from "redux/productInfo/reducers";
-import price from "redux/priceFilter/reducers";
-import origins from "redux/origins/reducers";
-
-const reducers = combineReducers({
-  productList: products,
-  productInfo: product,
-  cart,
-  priceFilter: price,
-  origins,
-});
-const store = createStore(reducers);
+import { store } from "redux/store";
 
 ReactDOM.render(
   <React.StrictMode>

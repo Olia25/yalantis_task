@@ -1,18 +1,17 @@
 import React from "react";
 import { ButtonOFQuantity } from "styledComponents";
-
 import { useDispatch } from "react-redux";
 
-const ButtonQuantity = (props) => {
+const ButtonQuantity = ({ quantity, disabled, id, operator, action }) => {
   const dispatch = useDispatch();
   return (
     <ButtonOFQuantity
-      disabled={props.quantity === 1 && props.disabled}
+      disabled={quantity === 1 && disabled}
       onClick={() => {
-        dispatch(props.action(props.id));
+        dispatch(action(id));
       }}
     >
-      <span>{props.operator}</span>
+      <span>{operator}</span>
     </ButtonOFQuantity>
   );
 };

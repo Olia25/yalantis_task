@@ -1,1 +1,1 @@
-export const setOrigins = (state) => state.origins;
+export const setOrigins = (state) => state.origins.data;
