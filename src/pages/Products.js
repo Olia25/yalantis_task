@@ -8,7 +8,7 @@ import {
   SelectStyle,
 } from "styledComponents";
 import useProducts from "helper/apiRequest/useProducts";
-import { API_URL } from "constants/constants";
+import { PER_PAGE } from "constants/constants";
 import { useDispatch, useSelector } from "react-redux";
 import ProductList from "components/productList/ProductList";
 import { setPriceFilter } from "redux/priceFilter/filterAllProd/selectors";
@@ -21,6 +21,8 @@ import FilterProducts from "components/filterProducts/FilterProducts";
 import { filterOrigAllProd } from "redux/originsFiltering/filterAllProd/selectors";
 import { originsFActions } from "redux/originsFiltering/filterAllProd/actions";
 import { priceActions } from "redux/priceFilter/filterAllProd/actions";
+import { productsActions } from "redux/productList/actions";
+import Pagination from "components/pagination/Pagination";
 
 const Home = () => {
   const [text, setText] = useState("");
@@ -28,13 +30,15 @@ const Home = () => {
   const dispatch = useDispatch();
   const prices = useSelector(setPriceFilter);
   const getOrigins = useSelector(filterOrigAllProd);
+  const value = useSelector(getProducts);
+  const page = value.page;
+  const totalItems = value.totalItems;
 
   const urlParams = useMemo(
-    () => setUrlParams(getOrigins, prices.min, prices.max),
-    [getOrigins, prices]
+    () => setUrlParams(getOrigins, prices.min, prices.max, page, PER_PAGE),
+    [getOrigins, prices, page, PER_PAGE]
   );
   useProducts(urlParams);
-  const value = useSelector(getProducts);
 
   const products = useMemo(() => sortProducts(value, selectedValue), [
     value.data,
@@ -42,6 +46,9 @@ const Home = () => {
   ]);
 
   const filteredProducts = filterProducts(products, text);
+
+  const setPage = (event) =>
+    dispatch(productsActions.setPage(event.selected + 1));
 
   return (
     <>
@@ -81,6 +88,11 @@ const Home = () => {
           </Container>
         </div>
       </LayoutWithSidebar>
+      <Pagination
+        selectedPage={Number(page)}
+        pageCount={Math.ceil(totalItems / PER_PAGE)}
+        setPage={setPage}
+      />
     </>
   );
 };

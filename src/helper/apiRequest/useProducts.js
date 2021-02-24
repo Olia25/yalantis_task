@@ -16,7 +16,7 @@ const useProducts = (urlParams) => {
           Authorization: TOKEN,
         },
       });
-      dispatch(productsActions.success(response.data.items));
+      dispatch(productsActions.success(response.data));
     } catch (e) {
       console.log(e);
       dispatch(productsActions.error(e.message));

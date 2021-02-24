@@ -201,3 +201,7 @@ export const InputQuantityStyle = styled.input`
   margin-right: 10px;
   text-align: center;
 `;
+export const MyProductsDelete = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;

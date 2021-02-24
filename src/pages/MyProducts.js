@@ -10,7 +10,7 @@ import FilterProducts from "components/filterProducts/FilterProducts";
 import ProductList from "components/productList/ProductList";
 import React, { useState, useMemo } from "react";
 import useMyProducts from "helper/apiRequest/useMyProducts";
-import { API_URL } from "constants/constants";
+import { PER_PAGE } from "constants/constants";
 import { useSelector, useDispatch } from "react-redux";
 import { setPriceFilterMyProd } from "redux/priceFilter/filterMyProd/selectors";
 import { getMyProducts } from "redux/myProductList/selectors";
@@ -25,6 +25,8 @@ import { patchProduct } from "helper/apiRequest/patchProduct";
 import { filterOrigMyProd } from "redux/originsFiltering/filterMyProd/selectors";
 import { originsFMyProdActions } from "redux/originsFiltering/filterMyProd/actions";
 import { priceMyProdActions } from "redux/priceFilter/filterMyProd/actions";
+import { myProductsActions } from "redux/myProductList/actions";
+import Pagination from "components/pagination/Pagination";
 
 const MyProducts = () => {
   const [text, setText] = useState("");
@@ -34,20 +36,25 @@ const MyProducts = () => {
   const getOrigins = useSelector(filterOrigMyProd);
   const selectProd = useSelector(selectUpdateProduct);
   const openModal = useSelector(selectUpdateOpenModal);
+  const value = useSelector(getMyProducts);
+  const page = value.page;
+  const totalItems = value.totalItems;
 
   const urlParams = useMemo(
-    () => setUrlParams(getOrigins, prices.min, prices.max),
-    [getOrigins, prices]
+    () => setUrlParams(getOrigins, prices.min, prices.max, page, PER_PAGE),
+    [getOrigins, prices, page, PER_PAGE]
   );
 
   useMyProducts(urlParams);
-  const value = useSelector(getMyProducts);
 
   const products = useMemo(() => sortProducts(value, selectedValue), [
     value.data,
     selectedValue,
   ]);
   const filteredProducts = filterProducts(products, text);
+
+  const setPage = (event) =>
+    dispatch(myProductsActions.setPage(event.selected + 1));
 
   return (
     <>
@@ -107,6 +114,11 @@ const MyProducts = () => {
           </Container>
         </div>
       </LayoutWithSidebar>
+      <Pagination
+        selectedPage={Number(page)}
+        pageCount={Math.ceil(totalItems / PER_PAGE)}
+        setPage={setPage}
+      />
     </>
   );
 };

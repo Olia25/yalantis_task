@@ -6,4 +6,6 @@ export const myProductsActions = {
   error: createAction("FETCH_ERROR_MY_PRODUCTS"),
   addMyProduct: createAction("ADD_MY_PRODUCTS"),
   updateMyProduct: createAction("UPDATE_MY_PRODUCT"),
+  deleteMyProduct: createAction("DELETE_MY_PRODUCT"),
+  setPage: createAction("SET_PAGE_MY_PRODUCTS"),
 };

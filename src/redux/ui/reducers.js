@@ -1,5 +1,4 @@
 import { createReducer } from "@reduxjs/toolkit";
-
 import { uiActions } from "redux/ui/actions";
 
 const initialState = {

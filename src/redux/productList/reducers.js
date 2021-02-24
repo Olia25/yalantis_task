@@ -6,6 +6,8 @@ const initialState = {
   error: null,
   loading: false,
   success: false,
+  page: 1,
+  totalItems: 0,
 };
 
 const reducers = createReducer(initialState, {
@@ -18,13 +20,18 @@ const reducers = createReducer(initialState, {
     ...state,
     loading: false,
     succeed: true,
-    data: action.payload,
+    data: action.payload.items,
+    totalItems: action.payload.totalItems,
   }),
   [productsActions.error]: (state, action) => ({
     ...state,
     loading: false,
     success: false,
     error: action.payload,
+  }),
+  [productsActions.setPage]: (state, action) => ({
+    ...state,
+    page: action.payload,
   }),
 });
 

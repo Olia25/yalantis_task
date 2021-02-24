@@ -19,7 +19,7 @@ const useProducts = (urlParams) => {
           },
         }
       );
-      dispatch(myProductsActions.success(response.data.items));
+      dispatch(myProductsActions.success(response.data));
     } catch (e) {
       console.log(e);
       dispatch(myProductsActions.error(e.message));

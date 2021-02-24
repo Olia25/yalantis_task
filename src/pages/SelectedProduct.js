@@ -1,10 +1,9 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { API_URL } from "constants/constants";
 import { ProductDescription, NameOfProduct, Button } from "styledComponents";
-import useProduct from "helper/apiRequest/useProduct";
 import { useSelector, useDispatch } from "react-redux";
 import { cartActions } from "redux/cart/actions";
+import useProduct from "helper/apiRequest/useProduct";
 
 const SelectedProduct = () => {
   const dispatch = useDispatch();
