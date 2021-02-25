@@ -30,7 +30,7 @@ const Form = ({
       initialValues={initialValues}
       validationSchema={addNewProduct.schema}
       onSubmit={(values) => {
-        formFunc(values, dispatch, productId);
+        formFunc(values, productId);
         dispatch(closeModal);
       }}
     >

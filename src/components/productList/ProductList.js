@@ -9,8 +9,8 @@ import {
 import Delete from "assets/icons/deleteIcon.png";
 import { useRouteMatch } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { deleteProduct } from "helper/apiRequest/deleteProduct";
 import moment from "moment";
+import { myProductsActions } from "redux/myProductList/actions";
 
 const ProductList = ({ product, title, action }) => {
   const matchMyProducts = useRouteMatch("/myProducts");
@@ -22,7 +22,9 @@ const ProductList = ({ product, title, action }) => {
         <div>
           <DeleteIcon
             src={Delete}
-            onClick={() => deleteProduct(product.id, dispatch)}
+            onClick={() =>
+              dispatch(myProductsActions.deleteRequest(product.id))
+            }
           />
         </div>
       )}

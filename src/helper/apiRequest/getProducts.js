@@ -1,16 +1,19 @@
 import axios from "axios";
 import { API_URL, TOKEN } from "constants/constants";
 
-export const deleteProduct = async (productId) => {
+export default async (urlParams) => {
+  console.log("urlParams GET", urlParams);
   try {
-    await axios(`${API_URL}/products/${productId}`, {
-      method: "DELETE",
+    const response = await axios(`${API_URL}/products?${urlParams}`, {
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
         Authorization: TOKEN,
       },
     });
+    return response.data;
   } catch (e) {
     console.log("error", e.message);
+    throw new Error(e.message);
   }
 };

@@ -31,22 +31,23 @@ const reducers = createReducer(initialState, {
   }),
   [myProductsActions.addMyProduct]: (state, action) => {
     const prod = action.payload;
+    console.log("prod", prod);
     return {
       ...state,
       data: [...state.data, prod],
     };
   },
   [myProductsActions.updateMyProduct]: (state, action) => {
-    const { obj, id } = action.payload;
+    const { value, productId } = action.payload;
     return {
       ...state,
       data: state.data.map((elem) => {
-        if (elem.id === id) {
+        if (elem.id === productId) {
           return {
             ...elem,
-            name: obj.name,
-            price: obj.price,
-            origin: obj.origin,
+            name: value.name,
+            price: value.price,
+            origin: value.origin,
           };
         }
         return elem;
@@ -54,10 +55,9 @@ const reducers = createReducer(initialState, {
     };
   },
   [myProductsActions.deleteMyProduct]: (state, action) => {
-    const { productId } = action.payload;
     return {
       ...state,
-      data: state.data.filter((elem) => elem.id !== productId),
+      data: state.data.filter((elem) => elem.id !== action.payload),
     };
   },
   [myProductsActions.setPage]: (state, action) => ({

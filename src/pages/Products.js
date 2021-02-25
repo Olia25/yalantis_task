@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import {
   SearchLine,
   Input,
@@ -7,7 +7,6 @@ import {
   SearchSorting,
   SelectStyle,
 } from "styledComponents";
-import useProducts from "helper/apiRequest/useProducts";
 import { PER_PAGE } from "constants/constants";
 import { useDispatch, useSelector } from "react-redux";
 import ProductList from "components/productList/ProductList";
@@ -38,7 +37,9 @@ const Home = () => {
     () => setUrlParams(getOrigins, prices.min, prices.max, page, PER_PAGE),
     [getOrigins, prices, page, PER_PAGE]
   );
-  useProducts(urlParams);
+  useEffect(() => dispatch(productsActions.fetch(urlParams)), []);
+
+  // useProducts(urlParams);
 
   const products = useMemo(() => sortProducts(value, selectedValue), [
     value.data,

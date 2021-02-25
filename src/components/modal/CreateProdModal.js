@@ -7,7 +7,7 @@ import Form from "components/form/Form";
 import Plus from "assets/icons/plus.png";
 import React from "react";
 import { addNewProduct } from "helper/shapes";
-import { postProduct } from "helper/apiRequest/postProduct";
+import { myProductsActions } from "redux/myProductList/actions";
 
 const CreateProdModal = () => {
   const dispatch = useDispatch();
@@ -26,7 +26,7 @@ const CreateProdModal = () => {
             titleButton="Create"
             initialValues={addNewProduct.shape}
             closeModal={uiActions.createModal.close()}
-            formFunc={postProduct}
+            formFunc={(value) => dispatch(myProductsActions.addRequest(value))}
           />
         </Modal>
       )}

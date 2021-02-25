@@ -21,7 +21,6 @@ import Modal from "components/modal/Modal";
 import { setUrlParams } from "helper/setUrlParams";
 import { sortProducts } from "helper/sortProducts";
 import { filterProducts } from "helper/filterProducts";
-import { patchProduct } from "helper/apiRequest/patchProduct";
 import { filterOrigMyProd } from "redux/originsFiltering/filterMyProd/selectors";
 import { originsFMyProdActions } from "redux/originsFiltering/filterMyProd/actions";
 import { priceMyProdActions } from "redux/priceFilter/filterMyProd/actions";
@@ -107,7 +106,11 @@ const MyProducts = () => {
                   }}
                   closeModal={uiActions.updateModal.close()}
                   productId={selectProd.id}
-                  formFunc={patchProduct}
+                  formFunc={(value, productId) =>
+                    dispatch(
+                      myProductsActions.updateRequest({ value, productId })
+                    )
+                  }
                 />
               </Modal>
             )}
