@@ -37,9 +37,7 @@ const Home = () => {
     () => setUrlParams(getOrigins, prices.min, prices.max, page, PER_PAGE),
     [getOrigins, prices, page, PER_PAGE]
   );
-  useEffect(() => dispatch(productsActions.fetch(urlParams)), []);
-
-  // useProducts(urlParams);
+  useEffect(() => dispatch(productsActions.fetch({ urlParams })), [urlParams]);
 
   const products = useMemo(() => sortProducts(value, selectedValue), [
     value.data,

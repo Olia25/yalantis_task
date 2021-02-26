@@ -3,16 +3,25 @@ import { myProductsActions } from "redux/myProductList/actions";
 import { deleteProduct } from "helper/apiRequest/deleteProduct";
 import { patchProduct } from "helper/apiRequest/patchProduct";
 import { postProduct } from "helper/apiRequest/postProduct";
+import getMyProducts from "helper/apiRequest/getMyProducts";
 
 export function* MyProductSagas() {
-  // yield takeEvery("FETCH_MY_PRODUCTS", onGetMyProduct);
+  yield takeEvery("FETCH_MY_PRODUCTS", onGetMyProduct);
   yield takeEvery("ADD__MY_PRODUCTS_REQUEST", onSetMyProduct);
   yield takeEvery("UPDATE_MY_PRODUCT_REQUEST", onSetUpdateMyProduct);
   yield takeEvery("DELETE_MY_PRODUCT_REQUEST", onDeleteMyProduct);
 }
 
-// function* onGetMyProduct(action) {
-// }
+function* onGetMyProduct(action) {
+  const { urlParams } = action.payload;
+  yield put(myProductsActions.start());
+  try {
+    const response = yield call(getMyProducts, urlParams);
+    yield put(myProductsActions.success(response));
+  } catch (e) {
+    yield put(myProductsActions.error(e.message));
+  }
+}
 
 function* onSetMyProduct(action) {
   yield put(myProductsActions.start());

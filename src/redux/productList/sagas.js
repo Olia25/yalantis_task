@@ -7,11 +7,10 @@ export function* ProductsSagas() {
 }
 
 function* onGetProducts(action) {
-  // console.log("action", action);
+  const { urlParams } = action.payload;
   yield put(productsActions.start());
   try {
-    const products = yield call(getProducts, action.payload);
-    // console.log("saga products", products);
+    const products = yield call(getProducts, urlParams);
     yield put(productsActions.success(products));
   } catch (error) {
     yield put(productsActions.error(error.message));

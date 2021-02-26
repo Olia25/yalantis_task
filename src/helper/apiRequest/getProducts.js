@@ -2,7 +2,6 @@ import axios from "axios";
 import { API_URL, TOKEN } from "constants/constants";
 
 export default async (urlParams) => {
-  console.log("urlParams GET", urlParams);
   try {
     const response = await axios(`${API_URL}/products?${urlParams}`, {
       method: "GET",

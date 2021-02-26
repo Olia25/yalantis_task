@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
   Container,
   Input,
@@ -9,7 +10,6 @@ import {
 import FilterProducts from "components/filterProducts/FilterProducts";
 import ProductList from "components/productList/ProductList";
 import React, { useState, useMemo } from "react";
-import useMyProducts from "helper/apiRequest/useMyProducts";
 import { PER_PAGE } from "constants/constants";
 import { useSelector, useDispatch } from "react-redux";
 import { setPriceFilterMyProd } from "redux/priceFilter/filterMyProd/selectors";
@@ -44,7 +44,9 @@ const MyProducts = () => {
     [getOrigins, prices, page, PER_PAGE]
   );
 
-  useMyProducts(urlParams);
+  useEffect(() => dispatch(myProductsActions.fetch({ urlParams })), [
+    urlParams,
+  ]);
 
   const products = useMemo(() => sortProducts(value, selectedValue), [
     value.data,
