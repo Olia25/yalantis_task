@@ -1,19 +1,19 @@
-export const setUrlParams = (
-  getOrigins,
-  pricesMin,
-  pricesMax,
+export const setUrlParams = ({
+  origins,
+  minPrice,
+  maxPrice,
   page,
-  perPage
-) => {
+  perPage,
+}) => {
   const params = new URLSearchParams();
-  if (getOrigins.length > 0) {
-    params.set("origins", getOrigins);
+  if (origins.length > 0) {
+    params.set("origins", origins);
   }
-  if (pricesMin) {
-    params.set("minPrice", pricesMin);
+  if (minPrice) {
+    params.set("minPrice", minPrice);
   }
-  if (pricesMax) {
-    params.set("maxPrice", pricesMax);
+  if (maxPrice) {
+    params.set("maxPrice", maxPrice);
   }
   if (page) {
     params.set("page", page);

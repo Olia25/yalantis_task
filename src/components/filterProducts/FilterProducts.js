@@ -1,21 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { BlockFilters, FilterByPrice } from "styledComponents";
 import { useDispatch, useSelector } from "react-redux";
-import InputsPrice from "components/filterPrice/InputsPrice";
 import { setOrigins } from "redux/origins/selectors";
 import FilterOrigins from "components/FilterOrigins/FilterOrigins";
-import PriceButton from "components/filterPrice/PriceButton";
 import { originsActions } from "redux/origins/actions";
+import { PriceInput } from "styledComponents";
 
-const FilterProducts = ({ filteredOrigins, actionOrig, actionPrice }) => {
+const FilterProducts = ({
+  filteredOrigins,
+  actionOrig,
+  actionPrice,
+  min,
+  max,
+}) => {
   const dispatch = useDispatch();
-
-  const [minPrice, setMinPrice] = useState("");
-  const [maxPrice, setMaxPrice] = useState("");
+  const origins = useSelector(setOrigins);
 
   useEffect(() => dispatch(originsActions.fetch()), []);
-
-  const origins = useSelector(setOrigins);
 
   return (
     <BlockFilters>
@@ -26,10 +27,27 @@ const FilterProducts = ({ filteredOrigins, actionOrig, actionPrice }) => {
       />
       <FilterByPrice>
         <h3>PRICE RANGE</h3>
-        <InputsPrice price={minPrice} setPrice={setMinPrice} />
+        <PriceInput
+          onChange={(e) => {
+            dispatch(
+              actionPrice({
+                minPrice: e.target.value,
+                maxPrice: max,
+              })
+            );
+          }}
+        />
         -
-        <InputsPrice price={maxPrice} setPrice={setMaxPrice} />
-        <PriceButton action={actionPrice({ minPrice, maxPrice })} />
+        <PriceInput
+          onChange={(e) => {
+            dispatch(
+              actionPrice({
+                maxPrice: e.target.value,
+                minPrice: min,
+              })
+            );
+          }}
+        />
       </FilterByPrice>
     </BlockFilters>
   );

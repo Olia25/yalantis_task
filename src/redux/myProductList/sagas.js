@@ -1,22 +1,54 @@
-import { call, put, takeEvery } from "@redux-saga/core/effects";
+import {
+  call,
+  put,
+  takeEvery,
+  takeLatest,
+  delay,
+  select,
+} from "@redux-saga/core/effects";
 import { myProductsActions } from "redux/myProductList/actions";
 import { deleteProduct } from "helper/apiRequest/deleteProduct";
 import { patchProduct } from "helper/apiRequest/patchProduct";
 import { postProduct } from "helper/apiRequest/postProduct";
 import getMyProducts from "helper/apiRequest/getMyProducts";
+import { filterOrigMyProd } from "redux/originsFiltering/filterMyProd/selectors";
+import { PER_PAGE } from "constants/constants";
+import { getPage } from "redux/myProductList/selectors";
+import history from "helper/history";
+import {
+  getMaxPrice,
+  getMinPrice,
+} from "redux/priceFilter/filterMyProd/selectors";
 
 export function* MyProductSagas() {
-  yield takeEvery("FETCH_MY_PRODUCTS", onGetMyProduct);
+  yield takeLatest("FETCH_MY_PRODUCTS", onGetMyProduct);
   yield takeEvery("ADD__MY_PRODUCTS_REQUEST", onSetMyProduct);
   yield takeEvery("UPDATE_MY_PRODUCT_REQUEST", onSetUpdateMyProduct);
   yield takeEvery("DELETE_MY_PRODUCT_REQUEST", onDeleteMyProduct);
 }
 
-function* onGetMyProduct(action) {
-  const { urlParams } = action.payload;
+function* onGetMyProduct() {
   yield put(myProductsActions.start());
   try {
-    const response = yield call(getMyProducts, urlParams);
+    const origins = yield select(filterOrigMyProd);
+    const page = yield select(getPage);
+    const minPrice = yield select(getMinPrice);
+    const maxPrice = yield select(getMaxPrice);
+    const perPage = PER_PAGE;
+
+    yield history.push(
+      `/?page=${page}&min=${minPrice}&max=${maxPrice}&origins=${origins}`
+    );
+    yield delay(500);
+
+    const response = yield call(getMyProducts, {
+      origins,
+      minPrice,
+      maxPrice,
+      page,
+      perPage,
+    });
+
     yield put(myProductsActions.success(response));
   } catch (e) {
     yield put(myProductsActions.error(e.message));

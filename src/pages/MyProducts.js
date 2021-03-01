@@ -12,13 +12,11 @@ import ProductList from "components/productList/ProductList";
 import React, { useState, useMemo } from "react";
 import { PER_PAGE } from "constants/constants";
 import { useSelector, useDispatch } from "react-redux";
-import { setPriceFilterMyProd } from "redux/priceFilter/filterMyProd/selectors";
-import { getMyProducts } from "redux/myProductList/selectors";
+import { getMyProducts, getPage } from "redux/myProductList/selectors";
 import { uiActions } from "redux/ui/actions";
 import { selectUpdateOpenModal, selectUpdateProduct } from "redux/ui/selectors";
 import Form from "components/form/Form";
 import Modal from "components/modal/Modal";
-import { setUrlParams } from "helper/setUrlParams";
 import { sortProducts } from "helper/sortProducts";
 import { filterProducts } from "helper/filterProducts";
 import { filterOrigMyProd } from "redux/originsFiltering/filterMyProd/selectors";
@@ -26,26 +24,30 @@ import { originsFMyProdActions } from "redux/originsFiltering/filterMyProd/actio
 import { priceMyProdActions } from "redux/priceFilter/filterMyProd/actions";
 import { myProductsActions } from "redux/myProductList/actions";
 import Pagination from "components/pagination/Pagination";
+import {
+  getMaxPrice,
+  getMinPrice,
+} from "redux/priceFilter/filterMyProd/selectors";
 
 const MyProducts = () => {
   const [text, setText] = useState("");
   const [selectedValue, setSelectedValue] = useState(null);
   const dispatch = useDispatch();
-  const prices = useSelector(setPriceFilterMyProd);
   const getOrigins = useSelector(filterOrigMyProd);
   const selectProd = useSelector(selectUpdateProduct);
   const openModal = useSelector(selectUpdateOpenModal);
   const value = useSelector(getMyProducts);
-  const page = value.page;
   const totalItems = value.totalItems;
+  const page = useSelector(getPage);
+  const minPrice = useSelector(getMinPrice);
+  const maxPrice = useSelector(getMaxPrice);
 
-  const urlParams = useMemo(
-    () => setUrlParams(getOrigins, prices.min, prices.max, page, PER_PAGE),
-    [getOrigins, prices, page, PER_PAGE]
-  );
-
-  useEffect(() => dispatch(myProductsActions.fetch({ urlParams })), [
-    urlParams,
+  useEffect(() => dispatch(myProductsActions.fetch()), [
+    getOrigins,
+    minPrice,
+    maxPrice,
+    page,
+    PER_PAGE,
   ]);
 
   const products = useMemo(() => sortProducts(value, selectedValue), [
@@ -81,6 +83,8 @@ const MyProducts = () => {
             filteredOrigins={getOrigins}
             actionOrig={originsFMyProdActions.getOriginsMP}
             actionPrice={priceMyProdActions.changeMinMaxPrice}
+            min={minPrice}
+            max={maxPrice}
           />
         </div>
         <div>
