@@ -1,1 +1,1 @@
-You can visit this project on Github Pages by following link:
+You can visit this project on Github Pages by following link: http://olia25.github.io/yalantis_task

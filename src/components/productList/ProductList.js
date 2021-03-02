@@ -2,7 +2,7 @@ import React from "react";
 import {
   Button,
   CoverOfProducts,
-  DeleteIcon,
+  DeleteProduct,
   StyledLink,
   MyProductsDelete,
 } from "styledComponents";
@@ -19,24 +19,18 @@ const ProductList = ({ product, title, action }) => {
   return (
     <CoverOfProducts>
       {matchMyProducts && (
-        <div>
-          <DeleteIcon
-            src={Delete}
-            onClick={() =>
-              dispatch(myProductsActions.deleteRequest(product.id))
-            }
-          />
-        </div>
+        <DeleteProduct
+          src={Delete}
+          onClick={() => dispatch(myProductsActions.deleteRequest(product.id))}
+        />
       )}
       <StyledLink to={`/products/${product.id}`}>
-        <div>
-          <MyProductsDelete>
-            <h4>{product.name}</h4>
-          </MyProductsDelete>
-          <h5>Created At: {moment(product.createdAt).format("DD.MM.YY")}</h5>
-          <p>{product.origin.toUpperCase()}</p>
-          <h2>{product.price} ₴</h2>
-        </div>
+        <MyProductsDelete>
+          <h4>{product.name}</h4>
+        </MyProductsDelete>
+        <h5>Created At: {moment(product.createdAt).format("DD.MM.YY")}</h5>
+        <p>{product.origin.toUpperCase()}</p>
+        <h2>{product.price} ₴</h2>
       </StyledLink>
 
       <Button onClick={action}>{title}</Button>
