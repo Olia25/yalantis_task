@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/yalantis_task/static/css/main.4e33f803.chunk.css",
+    "main.js": "/yalantis_task/static/js/main.d4f3b759.chunk.js",
+    "main.js.map": "/yalantis_task/static/js/main.d4f3b759.chunk.js.map",
+    "runtime-main.js": "/yalantis_task/static/js/runtime-main.f2bf46fe.js",
+    "runtime-main.js.map": "/yalantis_task/static/js/runtime-main.f2bf46fe.js.map",
+    "static/js/2.311ea24a.chunk.js": "/yalantis_task/static/js/2.311ea24a.chunk.js",
+    "static/js/2.311ea24a.chunk.js.map": "/yalantis_task/static/js/2.311ea24a.chunk.js.map",
+    "static/js/3.b3a45afa.chunk.js": "/yalantis_task/static/js/3.b3a45afa.chunk.js",
+    "static/js/3.b3a45afa.chunk.js.map": "/yalantis_task/static/js/3.b3a45afa.chunk.js.map",
+    "index.html": "/yalantis_task/index.html",
+    "static/css/main.4e33f803.chunk.css.map": "/yalantis_task/static/css/main.4e33f803.chunk.css.map",
+    "static/js/2.311ea24a.chunk.js.LICENSE.txt": "/yalantis_task/static/js/2.311ea24a.chunk.js.LICENSE.txt",
+    "static/media/cartIcon.9f1ab2a3.png": "/yalantis_task/static/media/cartIcon.9f1ab2a3.png",
+    "static/media/clear.e53dfbb8.png": "/yalantis_task/static/media/clear.e53dfbb8.png",
+    "static/media/close.e39103ac.svg": "/yalantis_task/static/media/close.e39103ac.svg",
+    "static/media/lemon.3202d494.jpg": "/yalantis_task/static/media/lemon.3202d494.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f2bf46fe.js",
+    "static/js/2.311ea24a.chunk.js",
+    "static/css/main.4e33f803.chunk.css",
+    "static/js/main.d4f3b759.chunk.js"
+  ]
+}
