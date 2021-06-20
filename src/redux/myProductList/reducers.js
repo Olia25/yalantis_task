@@ -6,6 +6,8 @@ const initialState = {
   error: null,
   loading: false,
   success: false,
+  page: 1,
+  totalItems: 0,
 };
 
 const reducers = createReducer(initialState, {
@@ -18,7 +20,8 @@ const reducers = createReducer(initialState, {
     ...state,
     loading: false,
     succeed: true,
-    data: action.payload,
+    data: action.payload.items,
+    totalItems: action.payload.totalItems,
   }),
   [myProductsActions.error]: (state, action) => ({
     ...state,
@@ -28,28 +31,39 @@ const reducers = createReducer(initialState, {
   }),
   [myProductsActions.addMyProduct]: (state, action) => {
     const prod = action.payload;
+    console.log("prod", prod);
     return {
       ...state,
       data: [...state.data, prod],
     };
   },
   [myProductsActions.updateMyProduct]: (state, action) => {
-    const { obj, id } = action.payload;
+    const { value, productId } = action.payload;
     return {
       ...state,
       data: state.data.map((elem) => {
-        if (elem.id === id) {
+        if (elem.id === productId) {
           return {
             ...elem,
-            name: obj.name,
-            price: obj.price,
-            origin: obj.origin,
+            name: value.name,
+            price: value.price,
+            origin: value.origin,
           };
         }
         return elem;
       }),
     };
   },
+  [myProductsActions.deleteMyProduct]: (state, action) => {
+    return {
+      ...state,
+      data: state.data.filter((elem) => elem.id !== action.payload),
+    };
+  },
+  [myProductsActions.setPage]: (state, action) => ({
+    ...state,
+    page: action.payload,
+  }),
 });
 
 export default reducers;

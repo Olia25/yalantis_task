@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import {
   SearchLine,
   Input,
@@ -7,34 +7,49 @@ import {
   SearchSorting,
   SelectStyle,
 } from "styledComponents";
-import useProducts from "helper/apiRequest/useProducts";
-import { API_URL } from "constants/constants";
+import { PER_PAGE } from "constants/constants";
 import { useDispatch, useSelector } from "react-redux";
 import ProductList from "components/productList/ProductList";
-import { setPriceFilter } from "redux/priceFilter/filterAllProd/selectors";
-import { getProducts } from "redux/productList/selectors";
+import {
+  getMinPrice,
+  getMaxPrice,
+} from "redux/priceFilter/filterAllProd/selectors";
+import { getProducts, getPage } from "redux/productList/selectors";
 import { cartActions } from "redux/cart/actions";
-import { setUrlParams } from "helper/setUrlParams";
 import { sortProducts } from "helper/sortProducts";
 import { filterProducts } from "helper/filterProducts";
 import FilterProducts from "components/filterProducts/FilterProducts";
 import { filterOrigAllProd } from "redux/originsFiltering/filterAllProd/selectors";
 import { originsFActions } from "redux/originsFiltering/filterAllProd/actions";
 import { priceActions } from "redux/priceFilter/filterAllProd/actions";
+import { productsActions } from "redux/productList/actions";
+import Pagination from "components/pagination/Pagination";
+
+import { useLocation, useHistory } from "react-router-dom";
 
 const Home = () => {
   const [text, setText] = useState("");
   const [selectedValue, setSelectedValue] = useState(null);
   const dispatch = useDispatch();
-  const prices = useSelector(setPriceFilter);
   const getOrigins = useSelector(filterOrigAllProd);
-
-  const urlParams = useMemo(
-    () => setUrlParams(getOrigins, prices.min, prices.max),
-    [getOrigins, prices]
-  );
-  useProducts(urlParams);
   const value = useSelector(getProducts);
+  const page = useSelector(getPage);
+  const totalItems = value.totalItems;
+  const minPrice = useSelector(getMinPrice);
+  const maxPrice = useSelector(getMaxPrice);
+
+  let location = useLocation();
+  // let history = useHistory();
+
+  console.log("location", location, "--------", location.search);
+
+  useEffect(() => dispatch(productsActions.fetch(history)), [
+    getOrigins,
+    minPrice,
+    maxPrice,
+    page,
+    PER_PAGE,
+  ]);
 
   const products = useMemo(() => sortProducts(value, selectedValue), [
     value.data,
@@ -42,6 +57,9 @@ const Home = () => {
   ]);
 
   const filteredProducts = filterProducts(products, text);
+
+  const setPage = (event) =>
+    dispatch(productsActions.setPage(event.selected + 1));
 
   return (
     <>
@@ -66,6 +84,8 @@ const Home = () => {
             filteredOrigins={getOrigins}
             actionOrig={originsFActions.getOrigins}
             actionPrice={priceActions.changeMinMaxPrice}
+            min={minPrice}
+            max={maxPrice}
           />
         </div>
         <div>
@@ -81,6 +101,11 @@ const Home = () => {
           </Container>
         </div>
       </LayoutWithSidebar>
+      <Pagination
+        selectedPage={Number(page)}
+        pageCount={Math.ceil(totalItems / PER_PAGE)}
+        setPage={setPage}
+      />
     </>
   );
 };

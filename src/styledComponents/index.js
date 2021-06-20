@@ -23,6 +23,13 @@ export const DeleteIcon = styled.img`
   height: 25px;
   align-self: center;
 `;
+export const DeleteProduct = styled.img`
+  height: 25px;
+  position: absolute;
+  left: 188px;
+  top: 10px;
+  // right: 100px;
+`;
 export const Header = styled.div`
   display: flex;
   justify-content: space-between;
@@ -62,7 +69,8 @@ export const Container = styled.div`
   justify-content: space-around;
 `;
 export const CoverOfProducts = styled.div`
-  border: 1px solid #a6a6a6;
+  position: relative;
+  border: 2px dashed #a6a6a6;
   padding-left: 10px;
   width: 210px;
   margin: 30px 20px;
@@ -200,4 +208,8 @@ export const InputQuantityStyle = styled.input`
   margin-left: 10px;
   margin-right: 10px;
   text-align: center;
+`;
+export const MyProductsDelete = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;

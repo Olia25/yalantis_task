@@ -1,8 +1,7 @@
 import axios from "axios";
 import { API_URL, TOKEN } from "constants/constants";
-import { myProductsActions } from "redux/myProductList/actions";
 
-export const postProduct = async (obj, dispatch) => {
+export const postProduct = async (obj) => {
   try {
     const response = await axios(`${API_URL}/products`, {
       method: "POST",
@@ -18,8 +17,8 @@ export const postProduct = async (obj, dispatch) => {
         },
       },
     });
-    if (response.status === 200) {
-      dispatch(myProductsActions.addMyProduct(response.data));
+    if (response.status !== 200) {
+      throw new Error(response.status);
     }
     return response;
   } catch (e) {

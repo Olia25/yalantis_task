@@ -1,10 +1,9 @@
 import axios from "axios";
 import { API_URL, TOKEN } from "constants/constants";
-import { myProductsActions } from "redux/myProductList/actions";
 
-export const patchProduct = async (obj, dispatch, id) => {
+export const patchProduct = async (obj, id) => {
   try {
-    const response = await axios(`${API_URL}/products/${id}`, {
+    await axios(`${API_URL}/products/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -18,11 +17,8 @@ export const patchProduct = async (obj, dispatch, id) => {
         },
       },
     });
-    if (response.status === 200) {
-      dispatch(myProductsActions.updateMyProduct({ obj, id }));
-    }
-    return response;
   } catch (e) {
     console.log("error", e.message);
+    throw new Error(e);
   }
 };

@@ -9,6 +9,11 @@ const initialState = {
 };
 
 const reducers = createReducer(initialState, {
+  // [productActions.fetch]: (state) => ({
+  //   ...state,
+  //   error: null,
+  //   loading: true,
+  // }),
   [productActions.start]: (state) => ({
     ...state,
     error: null,

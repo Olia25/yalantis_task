@@ -1,9 +1,9 @@
 export const sortProducts = (value, selectedValue) => {
   const sortedProducts = [...value.data];
   switch (selectedValue) {
-    case ("asc"):
+    case "asc":
       return sortedProducts.sort((a, b) => a.price - b.price);
-    case ("desc"):
+    case "desc":
       return sortedProducts.sort((a, b) => b.price - a.price);
     default:
       return sortedProducts;

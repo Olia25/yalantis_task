@@ -18,7 +18,7 @@ import {
   LogoContainer,
   Button,
   NavbarBrand,
-    Navbar,
+  Navbar,
 } from "./styledComponents";
 import { useSubTotal } from "helper/useSubTotal";
 import { useDispatch } from "react-redux";
